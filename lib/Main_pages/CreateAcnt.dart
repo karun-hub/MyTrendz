@@ -17,10 +17,10 @@ class CreateAcnt extends StatefulWidget {
 }
 
 class _CreateAcntState extends State<CreateAcnt> {
-   TextEditingController nameController = new TextEditingController();
-   TextEditingController emailController = new TextEditingController();
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-   TextEditingController cpasswordController = new TextEditingController();
+  TextEditingController cpasswordController = new TextEditingController();
   //final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -138,6 +138,7 @@ class _CreateAcntState extends State<CreateAcnt> {
           });
     });
     final user = await _auth.currentUser;
+    firebaseUser = authuser.user;
     print(user);
     if (user != null) {
       saveUserInfoToFireStore(firebaseUser).then((value) {

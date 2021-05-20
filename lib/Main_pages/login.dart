@@ -6,6 +6,7 @@ import 'package:flutter_apps/Main_pages/ErrorAlertDialogue.dart';
 import 'package:flutter_apps/Main_pages/HomePage.dart';
 import 'package:flutter_apps/Theme/CustomTextFiield.dart';
 import 'package:flutter_apps/Main_pages/CreateAcnt.dart';
+
 class LoginApp extends StatefulWidget {
   @override
   _State createState() => _State();
@@ -31,7 +32,6 @@ class _State extends State<LoginApp> {
             child: Form(
               key: _formKey,
               child: ListView(
-
                 children: <Widget>[
                   Container(
                       alignment: Alignment.center,
@@ -73,13 +73,15 @@ class _State extends State<LoginApp> {
                         color: Colors.redAccent,
                         child: Text('Login'),
                         onPressed: () {
-                          emailController.text.isNotEmpty&&
-                              passwordController.text.isNotEmpty
-                          ?loginUser()
-                          :showDialog(context: context, builder: (c){
-                            return ErrorAlertDialogue(Message: "Fill all the fields");
-                          });
-
+                          emailController.text.isNotEmpty &&
+                                  passwordController.text.isNotEmpty
+                              ? loginUser()
+                              : showDialog(
+                                  context: context,
+                                  builder: (c) {
+                                    return ErrorAlertDialogue(
+                                        Message: "Fill all the fields");
+                                  });
                         },
                       )),
                   Container(
@@ -87,14 +89,16 @@ class _State extends State<LoginApp> {
                     children: <Widget>[
                       Text('New user?'),
                       FlatButton(
-
                         textColor: Colors.redAccent,
                         child: Text(
                           'Create Account',
                           style: TextStyle(fontSize: 20),
                         ),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => CreateAcnt()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CreateAcnt()));
                           //signup screen
                         },
                       )
@@ -107,42 +111,47 @@ class _State extends State<LoginApp> {
   }
 
   FirebaseAuth _auth = FirebaseAuth.instance;
-  void loginUser() async
-  {
+  void loginUser() async {
     FirebaseUser firebaseUser;
-    await  _auth.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim()
-    ).then((authUser){
-      firebaseUser= authUser.user;
-    }).catchError((error){
+    await _auth
+        .signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim())
+        .then((authUser) {
+      firebaseUser = authUser.user;
+    }).catchError((error) {
       Navigator.pop(context);
-      showDialog(context: context,
-          builder: (c){
+      showDialog(
+          context: context,
+          builder: (c) {
             return ErrorAlertDialogue(Message: error.message.toString());
-          }
-      );
+          });
     });
-    if(firebaseUser !=null){
-      readData(firebaseUser).then((s){
+    if (firebaseUser != null) {
+      readData(firebaseUser).then((s) {
         Navigator.pop(context);
         Route route = MaterialPageRoute(builder: (c) => MyHomePage());
-        Navigator.pushReplacement(context, route);
+        Navigator.push(context, route);
       });
-
     }
   }
+
   Future readData(FirebaseUser fUser) async {
-    Firestore.instance.collection("users").document(fUser.uid).get().then((DataSnapshot) async {
-      await EcommerceApp.sharedPreferences.setString("uid", DataSnapshot.data[EcommerceApp.userUID]);
-      await EcommerceApp.sharedPreferences.setString(EcommerceApp.userEmail, DataSnapshot.data[EcommerceApp.userEmail]);
-      await EcommerceApp.sharedPreferences.setString(EcommerceApp.userName, DataSnapshot.data[EcommerceApp.userName]);
-      List<String> cartList = DataSnapshot.data[EcommerceApp.userCartList].cast<String>();
-      await EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, cartList);
+    Firestore.instance
+        .collection("users")
+        .document(fUser.uid)
+        .get()
+        .then((DataSnapshot) async {
+      await EcommerceApp.sharedPreferences
+          .setString("uid", DataSnapshot.data[EcommerceApp.userUID]);
+      await EcommerceApp.sharedPreferences.setString(
+          EcommerceApp.userEmail, DataSnapshot.data[EcommerceApp.userEmail]);
+      await EcommerceApp.sharedPreferences.setString(
+          EcommerceApp.userName, DataSnapshot.data[EcommerceApp.userName]);
+      List<String> cartList =
+          DataSnapshot.data[EcommerceApp.userCartList].cast<String>();
+      await EcommerceApp.sharedPreferences
+          .setStringList(EcommerceApp.userCartList, cartList);
     });
   }
-
 }
-
-
-

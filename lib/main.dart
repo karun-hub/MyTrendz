@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apps/Backend/Config.dart';
 import 'package:flutter_apps/Counters/AddressChanger.dart';
@@ -21,8 +24,14 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,7 +43,8 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           routes: {'/Showalldetails': (context) => ShowallDetails()},
-          home: LoginApp(),
-        ));
+          home: Scaffold(
+            body: LoginApp()
+          ) ));
   }
 }

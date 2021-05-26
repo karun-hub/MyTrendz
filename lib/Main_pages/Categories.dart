@@ -78,7 +78,6 @@ class _Category extends Categories {
 
   @override
   Widget build(BuildContext context) {
-
     if (Cates == null || cat == null) {
       print("error");
       return Container(
@@ -100,8 +99,9 @@ class _Category extends Categories {
                         Discount: discount,
                         Mrp: mrp,
                         Your_price: your_price,
+                        Item_Category: cat,
                         Status: status,
-                    Description: long_description,
+                        Description: long_description,
                       )));
             },
             child: Container(

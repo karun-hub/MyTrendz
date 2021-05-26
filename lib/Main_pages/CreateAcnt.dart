@@ -26,11 +26,11 @@ class _CreateAcntState extends State<CreateAcnt> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.pink,
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           "Create Account",
-          style: TextStyle(fontSize: 25, color: Colors.black),
+          style: TextStyle(fontSize: 25, color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -83,7 +83,7 @@ class _CreateAcntState extends State<CreateAcnt> {
                     padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: RaisedButton(
                       textColor: Colors.white,
-                      color: Colors.redAccent,
+                      color: Colors.pinkAccent,
                       child: Text('Create Account'),
                       onPressed: () {
                         uploadAndSave();
@@ -164,6 +164,7 @@ class _CreateAcntState extends State<CreateAcnt> {
         .setString(EcommerceApp.userName, nameController.text);
     await EcommerceApp.sharedPreferences
         .setStringList(EcommerceApp.userCartList, ["garbageValue"]);
-    await EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userOrderList, ["garbageValue"]);
+    await EcommerceApp.sharedPreferences
+        .setStringList(EcommerceApp.userOrderList, ["garbageValue"]);
   }
 }

@@ -9,10 +9,10 @@ import 'package:flutter_apps/Main_pages/CreateAcnt.dart';
 
 class LoginApp extends StatefulWidget {
   @override
-  _State createState() => _State();
+  _LoginAppState createState() => _LoginAppState();
 }
 
-class _State extends State<LoginApp> {
+class _LoginAppState extends State<LoginApp> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -22,7 +22,7 @@ class _State extends State<LoginApp> {
         appBar: AppBar(
           title: Text(
             'MyTrendz',
-            style: TextStyle(color: Colors.black, fontSize: 25),
+            style: TextStyle(color: Colors.pink, fontSize: 25),
           ),
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black38),
@@ -62,7 +62,7 @@ class _State extends State<LoginApp> {
                     onPressed: () {
                       //forgot password screen
                     },
-                    textColor: Colors.redAccent,
+                    textColor: Colors.pink[300],
                     child: Text('Forgot Password'),
                   ),
                   Container(
@@ -70,7 +70,7 @@ class _State extends State<LoginApp> {
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: RaisedButton(
                         textColor: Colors.white,
-                        color: Colors.redAccent,
+                        color: Colors.pinkAccent,
                         child: Text('Login'),
                         onPressed: () {
                           emailController.text.isNotEmpty &&
@@ -89,7 +89,7 @@ class _State extends State<LoginApp> {
                     children: <Widget>[
                       Text('New user?'),
                       FlatButton(
-                        textColor: Colors.redAccent,
+                        textColor: Colors.pink[300],
                         child: Text(
                           'Create Account',
                           style: TextStyle(fontSize: 20),

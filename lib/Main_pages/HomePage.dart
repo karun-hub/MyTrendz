@@ -44,11 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
         items: [
           BottomNavigationBarItem(
             icon: GestureDetector( onTap: (){
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
             },
                 child: new Icon(Icons.home,color: Colors.white,)),
             title: GestureDetector( onTap: (){
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
             },
                 child: new Text('Home',style: SmallGery,)),
           ),
@@ -125,12 +125,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                   children: [
                                     OfferZone(
                                       ImgPath: "assets/image1.jpg",
+                                        matter: "Ladies Wear"
                                     ),
                                     OfferZone(
                                       ImgPath: "assets/image2.jpg",
+                                        matter: "Ladies Wear"
                                     ),
                                     OfferZone(
                                       ImgPath: "assets/image1.jpg",
+                                        matter: "Ladies Wear"
                                     ),
                                   ]),
                             ),
@@ -257,8 +260,8 @@ class RoundBox extends StatelessWidget {
 }
 
 class OfferZone extends StatelessWidget {
-  final String ImgPath;
-  const OfferZone({Key key, this.ImgPath}) : super(key: key);
+  final String ImgPath,matter;
+  const OfferZone({Key key, this.ImgPath,this.matter}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -266,7 +269,14 @@ class OfferZone extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
-        child: Image.asset(ImgPath),
+        child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Categories(
+                    category: matter,
+                  )));
+            },
+            child: Image.asset(ImgPath)),
       ),
     );
   }
